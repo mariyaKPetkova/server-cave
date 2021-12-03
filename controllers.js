@@ -16,7 +16,8 @@ router.post('/', async (req, res) => {
     res.status(201).json(result)
 })
 router.get('/:id', async (req, res) => {
-    const data = await caveService.getOne(id)
+    
+    const data = await caveService.getOne(req.params.id)
     res.json(data)
 })
 module.exports = router
