@@ -20,4 +20,9 @@ router.get('/:id', async (req, res) => {
     const data = await caveService.getOne(req.params.id)
     res.json(data)
 })
+router.delete('/:id', async (req, res) => {
+    
+    const data = await caveService.del(req.params.id)
+    res.json(data)
+})
 module.exports = router

@@ -11,8 +11,12 @@ async function create(data) {
 async function getOne(id) {
     return Cave.findById(id).lean()
 }
+async function del(id) {
+    return Cave.findByIdAndDelete(id).lean()
+}
 module.exports = {
     getAll,
     getOne,
     create,
+    del
 }
