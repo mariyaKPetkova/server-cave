@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 
 const cors = require('./cors.js')
 const controllers = require('./controllers.js')
-
+const userController = require('./userController.js')
 start()
 async function start(){
     await new Promise((resolve,reject)=>{
@@ -25,6 +25,7 @@ async function start(){
     app.use(cors())
     app.use(express.json())
     app.use('/data/catalog', controllers)
+    app.use('/user', userController)
 
     app.get('/', (req, res) => {
         res.send('hi')
