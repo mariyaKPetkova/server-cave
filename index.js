@@ -4,6 +4,8 @@ const mongoose = require('mongoose')
 const cors = require('./cors.js')
 const controllers = require('./controllers.js')
 const userController = require('./userController.js')
+const auth = require('./middlewares/auth.js')
+
 start()
 async function start(){
     await new Promise((resolve,reject)=>{
@@ -21,9 +23,12 @@ async function start(){
     
   
     const app = express()
-
+    
     app.use(cors())
+    app.use(auth())
     app.use(express.json())
+    
+    
     app.use('/data/catalog', controllers)
     app.use('/user', userController)
 

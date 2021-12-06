@@ -1,5 +1,7 @@
 const router = require('express').Router()
 const { register } = require('./services/user.js')
+const { login } = require('./services/user.js')
+
 router.post('/register', async (req, res) => {
     const email = req.body.email
     const password = req.body.password
@@ -20,8 +22,18 @@ router.post('/register', async (req, res) => {
     }
 
 })
-router.post('/login', (req, res) => {
-    //console.log(req.body)
-    res.end()
+router.post('/login', async (req, res) => {
+    const email = req.body.email
+    const password = req.body.password
+    //console.log(email,password)
+    //vadidations must be not in try/catch
+    try {
+        const data = await login(email,password)
+        
+        res.json(data)
+    } catch (err) {
+        res.status(err.status || 400).json({message:err.message})
+    }
+
 })
 module.exports = router

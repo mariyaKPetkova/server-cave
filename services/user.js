@@ -1,6 +1,8 @@
 const User = require('../models/User.js')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
+const { SECRET } = require('../config.js')
+
 
 async function register(email, password) {
     //console.log(email, password)
@@ -28,11 +30,33 @@ function createToken(user) {
     const token = jwt.sign({
         _id: user.id,
         email: user.email
-    }, 'secret')
+    }, SECRET)
     return token
 }
-
+async function login(email, password) {
+    
+    const user = await User.findOne({email})
+    
+    if (!user) {
+        const err = new Error('Incorrect email or password.')
+        err.status = 401
+        throw err
+    }
+    
+    const match = await bcrypt.compare(password, user.hashedPassword)
+    if(!match){
+        const err = new Error('Incorrect email or password.')
+        err.status = 401
+        throw err
+    }
+    
+    return {
+        _id: user._id,
+        email: user.email,
+        accessToken:createToken(user)
+    }
+}
 module.exports = {
     register,
-
+    login
 }
