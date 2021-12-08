@@ -34,6 +34,8 @@ router.post('/login', async (req, res) => {
     } catch (err) {
         res.status(err.status || 400).json({message:err.message})
     }
-
+router.get('/logout',(req,res)=>{
+    res.status(204).end()
+})
 })
 module.exports = router
