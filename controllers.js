@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const auth = require('./middlewares/auth.js')
-const { isAuht } = require('./middlewares/guards.js')
+const { isAuht, isOwner } = require('./middlewares/guards.js')
+const preload = require('./middlewares/preload.js')
 const caveService = require('./services/caves.js')
 const { parseError } = require('./util.js')
 
@@ -32,6 +33,21 @@ router.get('/:id', async (req, res) => {
     const data = await caveService.getOne(req.params.id)
      
     res.json(data)
+})
+router.put('/:id', async (req, res) => {
+    const data = {
+        name: req.body.name,
+        location: req.body.location,
+        description: req.body.description,
+        imageUrl: req.body.imageUrl,
+    }
+    try {
+        const result = await caveService.update(req.data,updatedData)
+        res.json(result)
+    } catch (err) {
+        const message = parseError(err)
+        res.status(err.status || 400).json({message})
+    }
 })
 router.delete('/:id', async (req, res) => {
 

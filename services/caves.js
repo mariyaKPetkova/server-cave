@@ -14,9 +14,15 @@ async function getOne(id) {
 async function del(id) {
     return Cave.findByIdAndDelete(id).lean()
 }
+async function update(originalData,updatedData) {
+    Object.assign(originalData,updatedData)
+    await originalData.save()
+    return originalData
+}
 module.exports = {
     getAll,
     getOne,
     create,
-    del
+    del,
+    update
 }
