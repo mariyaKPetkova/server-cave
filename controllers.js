@@ -35,14 +35,19 @@ router.get('/:id', async (req, res) => {
     res.json(data)
 })
 router.put('/:id', async (req, res) => {
-    const data = {
+    const oldData = await caveService.getOne(req.params.id)
+    const newData = {
         name: req.body.name,
         location: req.body.location,
         description: req.body.description,
         imageUrl: req.body.imageUrl,
+        likes:req.body.likes
     }
+    // console.log(oldData)
+    // console.log(newData)
     try {
-        const result = await caveService.update(req.data,updatedData)
+        const result = await caveService.update(oldData,newData)
+        
         res.json(result)
     } catch (err) {
         const message = parseError(err)

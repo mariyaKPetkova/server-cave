@@ -9,7 +9,7 @@ async function create(data) {
     return result
 }
 async function getOne(id) {
-    return Cave.findById(id).lean()
+    return Cave.findById(id) //.lean()
 }
 async function del(id) {
     return Cave.findByIdAndDelete(id).lean()

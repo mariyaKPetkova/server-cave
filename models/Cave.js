@@ -5,7 +5,8 @@ const schema = new Schema({
     location: { type: String, required: [true, 'Location is required'] },
     description: { type: String, required: [true, 'Description is required'] },
     imageUrl: { type: String, required: [true, 'Image is required'] },
-    author: { type: Schema.Types.ObjectId, ref: 'User' }
+    author: { type: Schema.Types.ObjectId, ref: 'User' },
+    likes:[{ type: Schema.Types.ObjectId, ref: 'User', default: [] }],
 })
 
 module.exports = model('Cave', schema)
