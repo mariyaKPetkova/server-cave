@@ -41,7 +41,8 @@ router.put('/:id', async (req, res) => {
         location: req.body.location,
         description: req.body.description,
         imageUrl: req.body.imageUrl,
-        likes:req.body.likes
+        likes:req.body.likes,
+        countLikes: req.body.likes.length
     }
     // console.log(oldData)
     // console.log(newData)

@@ -7,6 +7,7 @@ const schema = new Schema({
     imageUrl: { type: String, required: [true, 'Image is required'] },
     author: { type: Schema.Types.ObjectId, ref: 'User' },
     likes:[{ type: Schema.Types.ObjectId, ref: 'User', default: [] }],
+    countLikes :{ type: Number, default: 0 }
 })
 
 module.exports = model('Cave', schema)
