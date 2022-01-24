@@ -5,6 +5,7 @@ const cors = require('./cors.js')
 const controllers = require('./controllers.js')
 const userController = require('./userController.js')
 const auth = require('./middlewares/auth.js')
+const port = process.env.PORT || 5000
 
 start()
 async function start(){
@@ -36,5 +37,5 @@ async function start(){
         res.send('hi')
     })
 
-    app.listen(5000, () => console.log('Server is listening on port 5000'))
+    app.listen(port, () => console.log('Server is listening'))
 }
