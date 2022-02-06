@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const cors = require('./cors.js')
 const controllers = require('./controllers.js')
 const userController = require('./userController.js')
+const newsController = require('./newsController.js')
 const auth = require('./middlewares/auth.js')
 const port = process.env.PORT || 5000
 
@@ -32,6 +33,7 @@ async function start(){
     
     app.use('/data/catalog', controllers)
     app.use('/user', userController)
+    app.use('/data/news', newsController)
 
     app.get('/', (req, res) => {
         res.send('hi')
